@@ -48,6 +48,15 @@ namespace LibraryManagementSystem
             Console.WriteLine();
             Console.WriteLine();
 
+            string booknm;
+            string authorname;
+            int price;
+            string category;
+            int bookid;
+            string membernm;
+            long mobileno;
+
+
             Console.WriteLine("Enter your choice:");
             ch = Convert.ToInt32(Console.ReadLine());
 
@@ -55,21 +64,76 @@ namespace LibraryManagementSystem
             {
                 case 1:
                     Console.WriteLine("Enter Book Name:");
-                    String booknm = Console.ReadLine();
-                    Connection.InsertBook(booknm);
+                    booknm = Console.ReadLine();
+                    Console.WriteLine("Enter Author Name:");
+                    authorname = Console.ReadLine();
+                    Console.WriteLine("Enter Book Price:");
+                    price =Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Enter Book Category:");
+                    category = Console.ReadLine();
+                    Connection.InsertBook(booknm,authorname,price,category);
 
                     break;
 
                 case 2:
+                    Console.WriteLine("Enter Book ID");
+                    bookid = Convert.ToInt32(Console.ReadLine());
+                    Connection.DeleteBook(bookid);
                     break;
 
                 case 3:
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine("****************************************************");
+                    Console.WriteLine("a.Update Author Name of Book");
+                    Console.WriteLine("b.Update Price of Book");
+                    Console.WriteLine("c.Update Category of Book");
+                    Console.WriteLine("****************************************************");
+                    Console.ResetColor();
+                    Console.WriteLine("Enter your choice");
+                    char c = Convert.ToChar(Console.ReadLine());
+                    switch(c)
+                    {
+                        case 'a':
+                            Console.WriteLine("Enter Author Name and Book Id");
+                            authorname = Console.ReadLine();
+                            bookid = Convert.ToInt32(Console.ReadLine());
+                            Connection.UpdateAuthorName(authorname, bookid);
+                            break;
+
+                        case 'b':
+                            Console.WriteLine("Enter Book Price and Book Id");
+                            price = Convert.ToInt32(Console.ReadLine());
+                            bookid = Convert.ToInt32(Console.ReadLine());
+                            Connection.UpdateBookPrice(price, bookid);
+                            break;
+                            
+
+                        case 'c':
+                            Console.WriteLine("Enter Book Category and Book Id");
+                            category =Console.ReadLine();
+                            bookid = Convert.ToInt32(Console.ReadLine());
+                            Connection.UpdateBookCategory(category, bookid);
+                            break;
+                            
+
+                        default:
+                            Console.WriteLine("Invalid Choice");
+                            break;
+
+                    }
                     break;
 
                 case 4:
+                    Console.WriteLine("Enter Author Name or Category or Book Name");
+                    string choice = Console.ReadLine();
+                    Connection.SearchDetails(choice);
                     break;
 
                 case 5:
+                    Console.WriteLine("Enter New Member's Name and Mobile No ");
+                    membernm = Console.ReadLine();
+                    mobileno = Convert.ToInt64(Console.ReadLine());
+                    Connection.AddMember(membernm,mobileno);
                     break;
 
                 case 6:
