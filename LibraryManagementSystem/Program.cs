@@ -55,6 +55,7 @@ namespace LibraryManagementSystem
             int bookid;
             string membernm;
             long mobileno;
+            int memberid;
 
 
             Console.WriteLine("Enter your choice:");
@@ -137,18 +138,58 @@ namespace LibraryManagementSystem
                     break;
 
                 case 6:
+                    Console.WriteLine("Enter Member Id for delete member");
+                    memberid = Convert.ToInt32(Console.ReadLine());
+                    Connection.DeleteMember(memberid);
+                    
                     break;
 
                 case 7:
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine("****************************************************");
+                    Console.WriteLine("a.Update Member Name");
+                    Console.WriteLine("b.Update Mobile Number");
+                    Console.WriteLine("****************************************************");
+                    Console.ResetColor();
+                    Console.WriteLine("Enter your choice");
+                    char c1 = Convert.ToChar(Console.ReadLine());
+                    switch(c1)
+                    {
+                        case 'a':
+                            Console.WriteLine("Enter Member Name and Member Id");
+                            membernm = Console.ReadLine();
+                            memberid = Convert.ToInt32(Console.ReadLine());
+                            Connection.UpdateMemberName(membernm, memberid);
+                            break;
+                        case 'b':
+                            Console.WriteLine("Enter Mobile No and Member Id");
+                            mobileno =Convert.ToInt64(Console.ReadLine());
+                            memberid = Convert.ToInt32(Console.ReadLine());
+                            Connection.UpdateMobileNumber(mobileno, memberid);
+                            break;
+                            
+                        default:
+                            Console.WriteLine("Incorrect Choice");
+                            break;
+                    }
                     break;
 
                 case 8:
+                    Console.WriteLine("Enter Book Name you want to issue");
+                    booknm = Console.ReadLine();
+                    //Connection.IssueBook(booknm);
                     break;
 
                 case 9:
+                    Console.WriteLine("Enter Book Id");
+                    bookid = Convert.ToInt32(Console.ReadLine());
+                    Connection.ReturnBook(bookid);
                     break;
 
                 case 10:
+                    Console.WriteLine("Enter Member Id");
+                    memberid = Convert.ToInt32(Console.ReadLine());
+                    Connection.CountFine(memberid);
                     break;
 
                 default:
@@ -158,9 +199,7 @@ namespace LibraryManagementSystem
             }
 
 
-            Console.WriteLine("===========================================");
-            Connection.GetMemberId();
-
+            
 
 
 
