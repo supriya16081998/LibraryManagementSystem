@@ -251,99 +251,65 @@ namespace LibraryDLL
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        public static void IssueBook(string booknm)
+        public static bool CheckToIssue(int mid)
         {
 
-           int m=0, p=0;
-           string returndate;
             con.Open();
-            string query= "Select * from BooksInfo where BookName = "+booknm;
-            cmd = new SqlCommand(query, con);
-             dr = cmd.ExecuteReader();
-            dr.Read();
+            cmd = new SqlCommand("prcBookNotReturn", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("mid", mid));
+            dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                m = (int)dr[0];
+                Console.Write("{0} {1}\n", dr[0], dr[1]);
             }
-            Console.WriteLine(m);
-            //int b = (int)m;
-            string query1 = "select * from Library where BookId =" + m;
-            cmd = new SqlCommand(query1, con);
-            dr = cmd.ExecuteReader();
-            dr.Read();
-            while (dr.Read())
+
+            if (dr.HasRows)
             {
-                p = (int)dr[1];
+                return true;
             }
 
-            string query2 = "select ReturnDate from Library where BookId =" + p;
-            cmd = new SqlCommand(query2, con);
-            dr = cmd.ExecuteReader();
-            dr.Read();
-            
-            returndate = (string)dr[4];
-
-
-            if (m==p && returndate!="NULL")
-                {
-                    int bookid = m;
-                    Console.WriteLine("Enter your MemberId");
-                    int memberid = Convert.ToInt32(Console.ReadLine());
-                    string query3 = "select Approval from Library where MemberId =" + memberid + "";
-                    cmd = new SqlCommand(query3, con);
-                    dr = cmd.ExecuteReader();
-                    dr.Read();
-                
-                    string apr =(string)dr[6];
-                    //string approval = (string)apr;
-
-                    if (apr == "Yes")
-                    {
-                        string query4 = "insert into Library (MemberId,BookId) values ('" + memberid + "'," + bookid + ")";
-                        cmd = new SqlCommand(query4, con);
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot issue book because you have not returned previous Book");
-                    }
-
-
-                }
-                 else if(m!=p)
-                {
-                    int bookid = m;
-                    Console.WriteLine("Enter your MemberId");
-                    int memberid = Convert.ToInt32(Console.ReadLine());
-                    string query3 = "select Approval from Library where MemberId =" + memberid + "";
-                    cmd = new SqlCommand(query3, con);
-                    dr = cmd.ExecuteReader();
-                    dr.Read();
-
-                    string apr = (string)dr[6];
-                    //string approval = (string)apr;
-
-                    if (apr == "Yes")
-                    {
-                        string query4 = "insert into Library (MemberId,BookId) values ('" + memberid + "'," + bookid + ")";
-                        cmd = new SqlCommand(query4, con);
-                    }
-                    else
-                    {
-                        Console.WriteLine("You cannot issue book because you have not returned previous Book");
-                    }
-
-
-                }
-            else
-                {
-                    Console.WriteLine("Book is already issued by someone");
-                }
-            
-            
             con.Close();
+            return false;
+           
 
 
+        }
 
+        public static void IssueBook(int mid)
+        {
+            if (CheckToIssue(mid) == true)
+            {
+                Console.WriteLine("Cannot issue, please return previous book");
+            }
+            else
+            {
+                Console.WriteLine("Enter Book Id and Book Name You Want to Issue:");
+                string booknm = Console.ReadLine();
+                int bookid = Convert.ToInt32(Console.ReadLine());
+                string query = "insert into Library(MemberId,BookId) values (" + mid + "," + bookid + ")";
+                cmd = new SqlCommand(query, con);
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch (System.Data.SqlClient.SqlException ex)
+                {
+                    string msg = "Insert Error";
+                    msg += ex.Message;
+
+                }
+                finally
+                {
+                    Console.WriteLine("Your Data Inserted Successfully");
+                    con.Close();
+                }
+
+
+            }
         }
         public static void ReturnBook(int bookid)
         {
@@ -421,12 +387,32 @@ namespace LibraryDLL
         public static void NotBorrowed()
         {
             con.Open();
-            string query = "select mf.MemberId ,mf.MemberName from MembersInfo mf inner join Library li on mf.MemberId =li.MemberId where ReturnDate> DueDate";
+            string query = " select mi.MemberId, mi.membername from MembersInfo mi where MemberId not in(select MemberId from Library)";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
             Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
             Console.Write("Member ID\t\tMember Name\n");
+            while (dr.Read())
+            {
+                Console.WriteLine();
+                Console.Write("{0}\t\t\t{1}\n", dr[0], dr[1]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            con.Close();
+
+
+        }
+        public static void BorrowedMaxTimes()
+        {
+            con.Open();
+            string query = " select top 1 bf.BookId, BookName , count(*) 'count' from Library l join BooksInfo bf on l.BookId = bf.BookId group by bf.BookId , BookName order by count desc";
+            cmd = new SqlCommand(query, con);
+            dr = cmd.ExecuteReader();
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine();
+            Console.Write("Book ID\t\t\tBook Name\n");
             while (dr.Read())
             {
                 Console.WriteLine();

@@ -188,9 +188,9 @@ namespace LibraryManagementSystem
                                     break;
 
                                 case 8:
-                                    Console.WriteLine("Enter Book Name you want to issue");
-                                    booknm = Console.ReadLine();
-                                    //Connection.IssueBook(booknm);
+                                    Console.WriteLine("Enter your Member Id");
+                                    memberid =Convert.ToInt32(Console.ReadLine());
+                                    Connection.IssueBook(memberid);
                                     break;
 
                                 case 9:
