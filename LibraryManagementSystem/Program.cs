@@ -11,9 +11,11 @@ namespace LibraryManagementSystem
     {
         static void Main(string[] args)
         {
-            
+
             //Console.WriteLine("Working on Database Connectivity");
-            
+            int ch, choose, choicer;
+            char co;
+            char r, s;
             Connection.CreateConnection();
             Console.WriteLine("Enter User Name");
             string username = Console.ReadLine();
@@ -21,22 +23,38 @@ namespace LibraryManagementSystem
             string pass = Console.ReadLine();
             if (Connection.Validate(username, pass) == true)
             {
+                
 
-                int ch, choose, choicer;
-                char co;
-                char r, s;
+                
                 Console.WriteLine("\n");
-                Console.WriteLine("\t********************WELCOME TO LIBRARY MANAGEMENT SYSTEM**********************");
+                
+                Console.WriteLine("\t\t\t\t*************************************************************************");
+                Console.WriteLine("\t\t\t\t*\t\t\t\t\t\t\t\t\t\t*");
+                Console.WriteLine("\t\t\t\t*\t\t\t\t\t\t\t\t\t\t*");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("\t\t\t\t*\t\t\t Library Management System \t\t\t\t*");
+                Console.ResetColor();
+                Console.WriteLine("\t\t\t\t*\t\t\t\t\t\t\t\t\t\t*");
+                Console.WriteLine("\t\t\t\t*\t\t\t\t\t\t\t\t\t\t*");
+                Console.WriteLine("\t\t\t\t*************************************************************************");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+
+
                 do
                 {
-
+                    Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                     Console.WriteLine("\n");
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("\t\t\t\t1.Library Funtions");
-                    Console.WriteLine("\t\t\t\t2.Library Reports\n");
+                    Console.WriteLine("\t\t\t\t\t\t\t\t1.Library Funtions");
+                    Console.WriteLine("\t\t\t\t\t\t\t\t2.Library Reports\n");
                     Console.ResetColor();
 
-                    Console.WriteLine("\t***************************************************************************");
+                    Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    Console.WriteLine("\n");
+                    Console.WriteLine("\n");
                     Console.WriteLine("Enter Your Choice");
                     choose = Convert.ToInt32(Console.ReadLine());
                     switch (choose)
@@ -50,19 +68,19 @@ namespace LibraryManagementSystem
 
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine();
-                                Console.WriteLine("\t***************************************************************************");
-                                Console.WriteLine("\t\t\t1.Add New Book to Library");
-                                Console.WriteLine("\t\t\t2.Remove Book From Library");
-                                Console.WriteLine("\t\t\t3.Update Author Name/Price/Category of the Book");
-                                Console.WriteLine("\t\t\t4.Search Book based on Author/Category/Book Name");
-                                Console.WriteLine("\t\t\t5.Add New Member");
-                                Console.WriteLine("\t\t\t6.Remove Member");
-                                Console.WriteLine("\t\t\t7.Update Member information");
-                                Console.WriteLine("\t\t\t8.Issue a Book to Member");
-                                Console.WriteLine("\t\t\t9.Record returns of Book from Member");
-                                Console.WriteLine("\t\t\t10.Calculate Fine if book is returned after due date");
+                                Console.WriteLine("\t\t\t\t*************************************************************************");
+                                Console.WriteLine("\t\t\t\t\t\t1.Add New Book to Library");
+                                Console.WriteLine("\t\t\t\t\t\t2.Remove Book From Library");
+                                Console.WriteLine("\t\t\t\t\t\t3.Update Author Name/Price/Category of the Book");
+                                Console.WriteLine("\t\t\t\t\t\t4.Search Book based on Author/Category/Book Name");
+                                Console.WriteLine("\t\t\t\t\t\t5.Add New Member");
+                                Console.WriteLine("\t\t\t\t\t\t6.Remove Member");
+                                Console.WriteLine("\t\t\t\t\t\t7.Update Member information");
+                                Console.WriteLine("\t\t\t\t\t\t8.Issue a Book to Member");
+                                Console.WriteLine("\t\t\t\t\t\t9.Record returns of Book from Member");
+                                Console.WriteLine("\t\t\t\t\t\t10.Calculate Fine if book is returned after due date");
                                 Console.WriteLine();
-                                Console.WriteLine("\t***************************************************************************");
+                                Console.WriteLine("\t\t\t\t*************************************************************************");
 
 
                                 Console.ResetColor();
@@ -106,12 +124,12 @@ namespace LibraryManagementSystem
 
                                     case 3:
                                         Console.ForegroundColor = ConsoleColor.Green ;
-                                        Console.WriteLine("\t***************************************************************************");
-                                        Console.WriteLine("\t\t\ta.Update Author Name of Book");
-                                        Console.WriteLine("\t\t\tb.Update Price of Book");
-                                        Console.WriteLine("\t\t\tc.Update Category of Book");
+                                        Console.WriteLine("\t\t\t\t*************************************************************************");
+                                        Console.WriteLine("\t\t\t\t\t\ta.Update Author Name of Book");
+                                        Console.WriteLine("\t\t\t\t\t\tb.Update Price of Book");
+                                        Console.WriteLine("\t\t\t\t\t\tc.Update Category of Book");
                                         Console.WriteLine();
-                                        Console.WriteLine("\t***************************************************************************");
+                                        Console.WriteLine("\t\t\t\t*************************************************************************");
                                         Console.ResetColor();
                                         Console.WriteLine();
                                         Console.WriteLine("Enter your choice");
@@ -170,10 +188,10 @@ namespace LibraryManagementSystem
 
                                     case 7:
                                         Console.ForegroundColor = ConsoleColor.DarkBlue;
-                                        Console.WriteLine("\t***************************************************************************");
-                                        Console.WriteLine("\t\t\ta.Update Member Name");
+                                        Console.WriteLine("\t\t\t\t*************************************************************************");
+                                        Console.WriteLine("\t\t\t\t\t\ta.Update Member Name");
                                         Console.WriteLine("\t\t\tb.Update Mobile Number");
-                                        Console.WriteLine("\t***************************************************************************");
+                                        Console.WriteLine("\t\t\t\t*************************************************************************");
                                         Console.ResetColor();
                                         Console.WriteLine();
                                         Console.WriteLine("Enter your choice");
@@ -232,15 +250,15 @@ namespace LibraryManagementSystem
                         case 2:
                             do
                             {
-                                Console.WriteLine("\t***************************************************************************");
+                                Console.WriteLine("\t\t\t\t*************************************************************************");
                                 Console.WriteLine("\n");
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("\t\t\t1.List of members who have not returned book before due date");
-                                Console.WriteLine("\t\t\t2.Members who have not borrowed any Book");
-                                Console.WriteLine("\t\t\t3.Book which has been borrowed maximum times");
+                                Console.WriteLine("\t\t\t\t\t\t1.List of members who have not returned book before due date");
+                                Console.WriteLine("\t\t\t\t\t\t2.Members who have not borrowed any Book");
+                                Console.WriteLine("\t\t\t\t\t\t3.Book which has been borrowed maximum times");
                                 Console.WriteLine("\n");
                                 Console.ResetColor();
-                                Console.WriteLine("\t***************************************************************************");
+                                Console.WriteLine("\t\t\t\t*************************************************************************");
                                 Console.WriteLine("\n");
                                 Console.WriteLine("Enter Your Choice:");
                                 choicer = Convert.ToInt32(Console.ReadLine());

@@ -48,7 +48,7 @@ namespace LibraryDLL
             con.Open();
             string query = "insert into BooksInfo values ('"+ booknm +"','"+ authornm +"',"+price+",'"+ category +"')";
             cmd = new SqlCommand(query, con);
-            cmd.ExecuteNonQuery();
+            //cmd.ExecuteNonQuery();
             //con.Close();
             try
             {
@@ -172,16 +172,16 @@ namespace LibraryDLL
             string query = "select * from BooksInfo where Category='" + choice + "'or BookName='" + choice + "' or AuthorName='" + choice + "'";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
-            Console.Write("Book ID\t\tBook Name\t\tAuthor Name\tPrice\tCategory\n");
+            Console.Write("Book ID\t\tBook Name\tAuthor Name\tPrice\t\tCategory\n");
             while (dr.Read())
             {
                 Console.WriteLine();
-                Console.Write("{0}\t\t{1}\t\t{2}\t  {3}\t{4}\n", dr[0], dr[1], dr[2], dr[3], dr[4]);
+                Console.Write("{0}\t\t{1}\t\t{2}\t\t  {3}\t{4}\n", dr[0], dr[1], dr[2], dr[3], dr[4]);
             }
             Console.WriteLine();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             con.Close();
         }
 
