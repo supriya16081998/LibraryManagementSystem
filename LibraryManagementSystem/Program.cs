@@ -281,6 +281,7 @@ namespace LibraryManagementSystem
 
 
                                 }
+                                Console.WriteLine();
                                 Console.WriteLine("Do you want to continue press Y or N");
                                 s = Convert.ToChar(Console.ReadLine());
 

@@ -172,16 +172,16 @@ namespace LibraryDLL
             string query = "select * from BooksInfo where Category='" + choice + "'or BookName='" + choice + "' or AuthorName='" + choice + "'";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
-            Console.Write("Book ID\t\tBook Name\tAuthor Name\tPrice\t\tCategory\n");
+            Console.Write("\tBook ID\t\tBook Name\tAuthor Name\tPrice\t\tCategory\n");
             while (dr.Read())
             {
                 Console.WriteLine();
-                Console.Write("{0}\t\t{1}\t\t{2}\t\t  {3}\t{4}\n", dr[0], dr[1], dr[2], dr[3], dr[4]);
+                Console.Write("\t{0}\t\t{1}\t\t{2}\t\t  {3}\t{4}\n", dr[0], dr[1], dr[2], dr[3], dr[4]);
             }
             Console.WriteLine();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             con.Close();
         }
 
@@ -260,16 +260,16 @@ namespace LibraryDLL
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("mid", mid));
             dr = cmd.ExecuteReader();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
-            Console.WriteLine("Employee Name\t\t\tBook Name\n");
+            Console.WriteLine("\tEmployee Name\t\t\tBook Name\n");
             
             while (dr.Read())
             {
-                Console.Write("{0} \t\t\t\t{1}\n", dr[1], dr[0]);
+                Console.Write("\t{0} \t\t\t\t{1}\n", dr[1], dr[0]);
             }
             Console.WriteLine();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             if (dr.HasRows)
             {
                 return true;
@@ -376,16 +376,16 @@ namespace LibraryDLL
             string query ="select mf.MemberId ,mf.MemberName from MembersInfo mf inner join Library li on mf.MemberId =li.MemberId where ReturnDate> DueDate";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
-            Console.Write("Member ID\t\tMember Name\n");
+            Console.Write("\t\t\t\t\tMember ID\t\tMember Name\n");
             while (dr.Read())
             {
                 Console.WriteLine();
-                Console.Write("{0}\t\t\t{1}\n", dr[0], dr[1]);
+                Console.Write("\t\t\t\t\t{0}\t\t\t{1}\n", dr[0], dr[1]);
             }
             Console.WriteLine();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             con.Close();
 
 
@@ -396,16 +396,16 @@ namespace LibraryDLL
             string query = " select mi.MemberId, mi.membername from MembersInfo mi where MemberId not in(select MemberId from Library)";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
-            Console.Write("Member ID\t\tMember Name\n");
+            Console.Write("\t\t\t\t\tMember ID\t\tMember Name\n");
             while (dr.Read())
             {
                 Console.WriteLine();
-                Console.Write("{0}\t\t\t{1}\n", dr[0], dr[1]);
+                Console.Write("\t\t\t\t\t{0}\t\t\t{1}\n", dr[0], dr[1]);
             }
             Console.WriteLine();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             con.Close();
 
 
@@ -416,16 +416,18 @@ namespace LibraryDLL
             string query = " select top 1 bf.BookId, BookName , count(*) 'count' from Library l join BooksInfo bf on l.BookId = bf.BookId group by bf.BookId , BookName order by count desc";
             cmd = new SqlCommand(query, con);
             dr = cmd.ExecuteReader();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             Console.WriteLine();
-            Console.Write("Book ID\t\t\tBook Name\n");
+            Console.Write("\t\t\t\t\tBook ID\t\t\tBook Name\n");
             while (dr.Read())
             {
                 Console.WriteLine();
-                Console.Write("{0}\t\t\t{1}\n", dr[0], dr[1]);
+                Console.Write("\t\t\t\t\t{0}\t\t\t{1}\n", dr[0], dr[1]);
             }
             Console.WriteLine();
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine("\t\t\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine();
+            Console.WriteLine();
             con.Close();
 
 
