@@ -253,9 +253,9 @@ namespace LibraryManagementSystem
                                 Console.WriteLine("\t\t\t\t*************************************************************************");
                                 Console.WriteLine("\n");
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("\t\t\t\t\t\t1.List of members who have not returned book before due date");
-                                Console.WriteLine("\t\t\t\t\t\t2.Members who have not borrowed any Book");
-                                Console.WriteLine("\t\t\t\t\t\t3.Book which has been borrowed maximum times");
+                                Console.WriteLine("\t\t\t\t\t1.List of members who have not returned book before due date");
+                                Console.WriteLine("\t\t\t\t\t2.Members who have not borrowed any Book");
+                                Console.WriteLine("\t\t\t\t\t3.Book which has been borrowed maximum times");
                                 Console.WriteLine("\n");
                                 Console.ResetColor();
                                 Console.WriteLine("\t\t\t\t*************************************************************************");
