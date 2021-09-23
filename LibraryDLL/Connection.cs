@@ -20,15 +20,16 @@ namespace LibraryDLL
             con = new SqlConnection();
             con.ConnectionString = constr;
         }
-        public static void Validate(string username, string password)
+        public static bool Validate(string username, string password)
         {
             if (username == "Supriya" && password == "Pass@123")
             {
                 Console.WriteLine("Login Successfull!!!!!!!!");
+                return true;
             }
             else
             {
-                Console.WriteLine("Login Failed!!!!!!");
+                return false;
             }
 
         }
@@ -259,11 +260,16 @@ namespace LibraryDLL
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("mid", mid));
             dr = cmd.ExecuteReader();
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            Console.WriteLine();
+            Console.WriteLine("Employee Name\t\t\tBook Name\n");
+            
             while (dr.Read())
             {
-                Console.Write("{0} {1}\n", dr[0], dr[1]);
+                Console.Write("{0} \t\t\t\t{1}\n", dr[1], dr[0]);
             }
-
+            Console.WriteLine();
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             if (dr.HasRows)
             {
                 return true;
